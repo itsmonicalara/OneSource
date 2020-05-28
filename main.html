@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html>
+
+<head>
+
+
+    <!-- Begin Inspectlet Asynchronous Code -->
+<script type="text/javascript">
+(function() {
+window.__insp = window.__insp || [];
+__insp.push(['wid', 1914911704]);
+var ldinsp = function(){
+if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=1914911704&r=' + Math.floor(new Date().getTime()/3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+setTimeout(ldinsp, 0);
+})();
+</script>
+<!-- End Inspectlet Asynchronous Code -->
+   
+    <link rel="shortcut icon" href="IMG/LogoOneSource.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:800" rel="stylesheet"> 
+    <link href="CSS/Second.css" rel="stylesheet">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/store.everything.min.js"></script>
+
+</head>
+
+    <body>
+        <h1>ONESOURCE</h1>
+        <img src="IMG/hamburguesita.png" id="menu">
+        
+        <ul class="mainmenu">
+            <li>User: <span></span></li>
+            <a href="index.html"><li>Log out</li></a>
+        </ul>
+        
+        <section id="main">
+            <div class="wrapper1">
+                <h3 id="h34"><font color="white">My Lights</font></h3>
+                
+                <div id='lights-container'></div>
+                
+                <input type="button" class="btn change-section" data-goto='#add-light' id="add-light-btn" value="Register New Light">
+            
+                <h3 id="h35"><font color="white">My ACs</font></h3>
+                
+                <div id='ac-container'></div>
+                
+                <input type="button" class="btn change-section" data-goto='#add-ac' id="add-ac-btn" value="Register New AC">
+                
+            </div>
+        </section>
+        
+        <section id="add-light">
+            <div class="wrapper">
+                <h3><font color="white">Add Light</font></h3>
+    
+               <br>
+                <div class="light-type">
+                    <div class="type-a"></div>
+                   
+                </div>
+                <br>
+               
+                <form>
+                    <span class='input-icon plate-icon'><font color="white">Light name: </font></span><input type="text" id="plate1" placeholder="Light name">
+                    <span class="register-error"></span>
+                    <input type="button" class="btn" id="add-new-light" value="Register light">
+                    <span class="register cancel change-section" data-goto="#main">Cancel</span>
+                </form>
+            </div>
+        </section>
+        
+        <section id="add-ac">
+            <div class="wrapper">
+                <h3><font color="white">Add AC</font></h3>
+    
+               <br>
+                <div class="ac-type">
+                    <div class="ac-a"></div>
+                   
+                </div>
+                <br>
+              
+               
+               
+                <form>
+                    <span class='input-icon plate-icon'><font color="white">AC name: </font></span><input type="text" id="plate2" placeholder="AC name">
+                    <span class="register-error"></span>
+                    <input type="button" class="btn" id="add-new-ac" value="Register AC">
+                    <span class="register cancel change-section" data-goto="#main">Cancel</span>
+                </form>
+            </div>
+        </section>
+   
+        
+        <section id="light-details">
+            <div class="wrapper2">
+                <h3 id="h33">Light actions</h3>
+                <div class="light-type">
+                    <div></div>
+                </div>
+                <br>
+                
+                <label class="switch">
+                <input type="checkbox" id='light-status' data-sid=''>
+                <span class="slider round"></span>
+                </label>
+               
+                <h4><font color="white">Name:</font></h4>
+                <h4 class="light-details-plate"><font color="white"></font></h4>
+                
+                
+                <input type="button" class="btn" id="goback-light" value="Go Back">
+               
+            </div>
+        </section>
+        
+        <section id="ac-details">
+            <div class="wrapper2">
+                <h3 id="h33">AC actions</h3>
+                <div class="ac-type">
+                    <div></div>
+                </div>
+                <br>
+                <label class="switch2">
+                <input type="checkbox">
+                <span class="slider2 round2"></span>
+                </label>
+                <div class="rslidercontainer">
+                    <br>
+                <p><font color="white">Temperature: </font><output id="tempOut"></output></p>
+                    <br>
+                <input type="range" min="10" max="50" id="tempIn" class="rslider" oninput="tempOut.value = tempIn.value">
+                </div>
+                <h4><font color="white">Name:</font></h4>
+                <h4 class="ac-details-plate"></h4>
+                
+                
+                <input type="button" class="btn" id="goback-ac" value="Go Back">
+               
+            </div>
+        </section>
+
+        <div class="container1">            
+            </div>
+
+    <script>
+        
+                   if(!store.get('logged-in-user')){
+               window.location.href = 'index.html';
+           }
+            
+            if(store.get('tot-lights') == null){
+                store.get('tot-lights',0);
+            }
+
+            $('.change-section').on('click touchstart',function(){
+                $('section').fadeOut().delay(600);
+                $($(this).data('goto')).fadeIn();
+            });
+            
+            $('#menu').on('click touchstart',function(){
+                $('ul').slideToggle();
+            });
+            
+            $('li span').text(store.get('logged-in-user'));
+            
+            var s_type = 'a';
+            
+            
+            if(store.get('tot-lights')==null){
+                store.set('tot-lights',0);
+            }
+        
+        
+        
+                 var onoff = "off";
+        
+    
+         $('body').on('click touchstart','#light-status',function(){
+             
+             
+              store.set('light-'+store.get('tot-lights'),{
+                   type: s_type,
+                   status: 'off'
+             
+                });
+             
+                var s = store.get(onoff);
+                if(s.status == 'off'){
+                    
+                    $('#light-status')[0].checked = true;
+                    $('#add-light .light-type div').removeClass();
+                    $('#add-light .light-type div').addClass('type-'+s.type);
+                    $('#add-light .light-type div').addClass('on');
+                    
+                    store.update(onoff,function(onoff){
+                        onoff.status = 'on';
+                    });
+                }
+                   
+                else{
+                    $('#light-status')[0].checked = false;
+                    $('#add-light .light-type div').removeClass();
+                    $('#add-light .light-type div').addClass('type-'+s.type);
+                    $('#add-light .light-type div').addClass('off');
+                    
+                    store.update(onoff,function(onoff){
+                        onoff.status = 'off';
+                    });
+                }
+                
+            });
+        
+        
+        
+            
+            $('#add-new-light').on('click touchstart',function(){ 
+                store.set('tot-lights',store.get('tot-lights')+1);
+                store.set('light-'+store.get('tot-lights'),{
+                    owner: store.get('logged-in-user'),
+                    type: s_type,
+                    plate: $('#plate1').val(),
+                    status: 'off',
+                    enabled: true
+                });
+                displaylight();
+                $('section').fadeOut().delay(600);
+                $("#main").fadeIn(); 
+            });
+            
+            function displaylight(){ 
+                $('#lights-container').empty();
+                for(var i=1; i<=store.get('tot-lights'); i++){
+                    var s = store.get('light-'+i);
+                    if(s.owner == store.get('logged-in-user')){
+                        $('#lights-container').append(`
+                            <div class="light" data-id='light-${i}'>
+                            <div class="type type-${s.type} ${s.status}"></div>
+                            <div class="plate1">${s.plate}</div>
+                            </div>
+                        `);
+                    }
+                }    
+            }
+        
+            var current_light = "";
+            
+            $('body').on('click touchstart','.light',function(){
+                current_light = $(this).data('id');
+                
+                var s = store.get($(this).data('id'));
+                $('.light-details-plate').html(s.plate);
+                $('.light-type div').removeClass();
+                $('.light-type div').addClass('type-'+s.type);
+                $('.light-type div').addClass(s.status);
+                
+               
+                $('section').fadeOut().delay(600);
+                $("#light-details").fadeIn();   
+                
+            });
+            
+            $('body').on('click touchstart','#light-status',function(){
+                
+                var s = store.get(current_light);
+                if(s.status == 'off'){
+                    
+                    $('#light-status')[0].checked = true;
+                    $('#light-details .light-type div').removeClass();
+                    $('#light-details .light-type div').addClass('type-'+s.type);
+                    $('#light-details .light-type div').addClass('on');
+                    
+                    store.update(current_light,function(current_light){
+                        current_light.status = 'on';
+                    });
+                }
+                   
+                else{
+                    $('#light-status')[0].checked = false;
+                    $('#light-details .light-type div').removeClass();
+                    $('#light-details .light-type div').addClass('type-'+s.type);
+                    $('#light-details .light-type div').addClass('off');
+                    
+                    store.update(current_light,function(current_light){
+                        current_light.status = 'off';
+                    });
+                }
+                
+            });
+        
+        displaylight();
+        displaylight();
+        
+        
+        var current_enabled = "";
+        
+        $('#goback-light').on('click touchstart',function(){
+           
+        
+            $('#light-details').fadeOut().delay(600);
+                $("#main").fadeIn();   
+            
+        });
+       
+         if(store.get('tot-ac')==null){
+                store.set('tot-ac',0);
+            }
+            
+        $('#add-new-ac').on('click touchstart',function(){
+            store.set('tot-ac',store.get('tot-ac')+1);
+            store.set('ac-'+store.get('tot-ac'),{
+                    owner: store.get('logged-in-user'),
+                    type: s_type,
+                    plate: $('#plate2').val(),
+                    status: 'off',
+                    enabled: true,
+                    temp: 20
+                });
+                displayac();
+                $('section').fadeOut().delay(600);
+                $("#main").fadeIn();
+            });
+        
+            function displayac(){ 
+                $('#ac-container').empty();
+                for(var i=1; i<=store.get('tot-ac'); i++){
+                    var s = store.get('ac-'+i);
+                    if(s.owner == store.get('logged-in-user')){
+                        $('#ac-container').append(`
+                            <div class="ac" data-id='ac-${i}'>
+                            <div class="type ac-${s.type} ${s.status}"></div>
+                            <div class="plate2">${s.plate}</div>
+                            </div>
+                        `);
+                    }
+                }    
+            }
+        
+        
+                    var current_ac = "";
+            
+            $('body').on('click touchstart','.ac',function(){
+                current_ac = $(this).data('id');
+                
+                var s = store.get($(this).data('id'));
+                $('.ac-details-plate').html(s.plate);
+                $('#tempOut').html(s.temp);
+                $('#tempIn').val(s.temp);
+                $('.ac-type div').removeClass();
+                $('.ac-type div').addClass('ac-'+s.type);
+                $('.ac-type div').addClass(s.status);
+                
+                
+                /*if(s.status == 'off'){
+                    $('#ac-status')[0].checked = false;
+                }
+                else{
+                     $('#ac-status')[0].checked = true;
+                }*/
+                
+                $('section').fadeOut().delay(600);
+                $("#ac-details").fadeIn();   
+                
+            });
+            
+            $('body').on('click touchstart','#ac-status',function(){
+                
+                var s = store.get(current_light);
+                if(s.status == 'off'){
+                    
+                    $('#ac-status')[0].checked = true;
+                    $('#ac-details .ac-type div').removeClass();
+                    $('#ac-details .ac-type div').addClass('ac-'+s.type);
+                    $('#ac-details .ac-type div').addClass('on');
+                    
+                    store.update(current_ac,function(current_ac){
+                        current_ac.status = 'on';
+                    });
+                }
+                   
+                else{
+                    $('#ac-status')[0].checked = false;
+                    $('#ac-details .ac-type div').removeClass();
+                    $('#ac-details .ac-type div').addClass('ac-'+s.type);
+                    $('#ac-details .ac-type div').addClass('off');
+                    
+                    store.update(current_ac,function(current_ac){
+                        current_ac.status = 'off';
+                    });
+                }
+                
+            });
+        
+        displayac();
+        
+        
+        var current_enabled = "";
+        
+        $('#goback-ac').on('click touchstart',function(){
+           current_ac.temp = document.getElementById("tempIn").value;
+            
+            $('#ac-details').fadeOut().delay(600);
+                $("#main").fadeIn();   
+            
+        });
+        
+        
+        
+        </script>
+        
+</body>
+
+</html>

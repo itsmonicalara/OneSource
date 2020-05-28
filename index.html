@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html>
+
+<head>
+
+    <!-- Begin Inspectlet Asynchronous Code -->
+<script type="text/javascript">
+(function() {
+window.__insp = window.__insp || [];
+__insp.push(['wid', 1914911704]);
+var ldinsp = function(){
+if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=1914911704&r=' + Math.floor(new Date().getTime()/3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+setTimeout(ldinsp, 0);
+})();
+</script>
+<!-- End Inspectlet Asynchronous Code -->
+  
+    <link rel="shortcut icon" href="IMG/LogoOneSource.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="CSS/login.css" rel="stylesheet">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/store.everything.min.js"></script>
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129408683-1"></script>
+        <script>
+             window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-129408683-1');
+        </script>
+</head>
+
+<body>
+    <section id="login">
+
+        <form action="/action_page.php" id="login1">
+
+            <div class="container" id="containerlog">
+                <div class="imgcontainer">
+                    <img src="IMG/LogoOneSourceWhite.png" alt="facebook" class="avatar">
+                </div>
+                <span for="uname" id="pepe"><font color="white"><b>Username</b></font></span>
+                <input type="text" placeholder="Enter Username" name="uname" id="username">
+
+                <span for="pwd"><font color="white"><b>Password</b></font></span>
+                <input type="password" placeholder="Enter Password" name="pwd" id="pwd1">
+                <div type="submit" id="cardrone">Login to OneSource</div>
+                <span class="register-error"></span>
+
+            </div>
+            
+             </form>
+
+            <div class="container1" style="background-color:#5BBCA9">
+
+                <span class="psw  change-section" id="create" data-goto="signup"><a href="#">Create account</a></span>
+            </div>
+
+       
+    </section>
+
+    <section id="signup">
+        <header>
+            <div id="header-wrapper">
+                <h2 id="h2"><font color="white">Join to OneSource</font></h2>
+            </div>
+        </header>
+
+        <form action="/action_page.php" id="signup1">
+
+            <div class="container" id="containerlog">
+
+                <span for="name"><font color="white"><b>Name</b></font></span>
+                <input id="create-name" type="text" placeholder="Enter Name">
+
+                <span for="uname"><font color="white"><b>Username</b></font></span>
+                <input id="create-username" type="text" placeholder="Enter Username">
+
+                <span for="pwd"><font color="white"><b>Password</b></font></span>
+                <input id="create-pwd" type="password" placeholder="Enter Password">
+
+                <span for="pwd"><font color="white"><b>Confirm password</b></font></span>
+                <input id="create-confirm" type="password" placeholder="Enter Password">
+
+                <div type="submit" id="signcardrone" data-goto="login" class="change-section" id="new">Sign up to OneSource</div>
+
+                <span class="login-error"></span>
+            </div>
+            
+             </form>
+
+            <div class="container2" style="background-color:#5BBCA9">
+                <button type="button" class="cancelbtn"><font color="black">Go Back</font></button>
+            </div>
+
+    </section>
+
+   
+    <script>
+        
+       
+        $('#signup').hide();
+                    //Setting (or reseting) logged user
+            //store.set('logged-in-user', null);
+
+            if(store.get('tot-usr')==null){
+                
+                store.set('tot-usr',0);
+            }
+            
+            window.localStorage.setItem('logged-in-user',null);
+            
+            //Change sections
+            
+            $('#create').on('click',function(){
+
+               $('#login').hide();
+               $('#signup').show();
+
+
+            });
+            
+
+            //Create new account
+           
+                $('#signcardrone').on('click',function(){
+
+                    var error = false;
+
+                if($('#create-name').val()==''){
+                    error = true;
+               }
+
+                if($('#create-username').val()==''){
+                    error = true;
+               }
+
+                if($('#create-pwd').val()==''){
+                    error = true;
+               }
+
+                if($('#create-confirm').val()==''){
+                  error = true;
+
+               }
+
+               if(error){
+                    
+                    $('.login-error').text("Fill all the fields");
+                     $('.login-error').fadeIn().delay(600);
+                     $('.login-error').fadeOut(1000);
+
+               }
+
+               if($('#create-pwd').val() != $('#create-confirm').val()){
+                    error = true;
+                     $('.login-error').text("The password is different");
+                     $('.login-error').fadeIn().delay(600);
+                     $('.login-error').fadeOut(1000);
+
+               }
+
+               if(!error){
+
+                store.set('tot-usr', store.get('tot-usr')+1);
+                
+                store.set('user-'+store.get('tot-usr'),{
+                        name: $('#create-name').val(),
+                        username: $('#create-username').val(),
+                        license: $('#create-license').val(),
+                        password: $('#create-pwd').val()
+                });
+                
+                $('#signup').fadeOut().delay(600);
+                $('#login').fadeIn();
+
+               }
+
+               if(store.get('tot-usr')){
+                error = false;
+
+                    for(var i=1; i<=store.get('tot-usr'); i++){
+
+                        console.log(store.get('user-'+i).username);
+                        if($('#create-username').val() == store.get('user-'+i).username){
+                            error = true;
+                            break;
+                        }
+                    }
+
+                    if(error){
+                        $('.login-error').text("User already taken");
+                        $('.login-error').fadeIn().delay(600);
+                        $('.login-error').fadeOut(1000);
+
+                    }
+               }
+             
+            });
+            
+            //Log In
+            $('#cardrone').on('click',function(){
+               
+                for(var i=1; i<=store.get('tot-usr'); i++){
+                    var u = store.get('user-'+i);
+
+                    if(u.username == $('#username').val() && u.password == $('#pwd1').val()){
+                        
+                       store.set('logged-in-user', u.username);
+                    
+                  
+                        window.location.href = 'main.html';
+                    }
+                }
+                
+            $('.register-error').html("Wrong username or password");
+            $('.register-error').fadeIn().delay(600);
+            $('.register-error').fadeOut();
+            });
+        
+    </script>
+        
+        <script>
+
+       
+
+        $('.cancelbtn').on("click", function() {
+
+            cancelbtn = $(this).text();
+
+            $('section').hide();
+            $('#login').show();
+        })
+
+
+
+        $('.back').on("click", function() {
+
+            back = $(this).text();
+
+            $('#options').hide();
+            $('#login').show();
+        })
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,402 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+    background-image: url('../IMG/fondito11.png');
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+    position: relative;
+    height: 100vh;
+}
+
+
+h1{
+    font-size: 30px;
+    font-family: 'Raleway', sans-serif;
+    margin: auto;
+    padding-left: 23px;
+    padding-top: 17px;
+    height: 45px;
+    color: #black;
+    z-index: 20;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
+}
+
+@media (min-width: 500px){
+    h1{
+        font-size: 50px;
+        padding-top: 30px;
+    }
+}
+
+h3{
+    color: #black;
+    margin-bottom: 4vw;
+    font-size: 6vw;
+    margin-top: -20px;
+}
+
+h4{
+    color: white;
+    margin: 10px 0 18px 6px;
+}
+
+/* FORM ELEMENTS */
+
+section#add-car form{
+    width: 100%;
+    margin: 30px auto;
+}
+
+input{
+    box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 200;
+    padding: 6px 4px 4px 4px;
+    margin-bottom: 14px;
+    width: 100%;
+    transition: all 0.3s ease-in;
+}
+
+input[type=text],
+input[type=password]{
+    width: calc(100% - 36px);
+    display: inline-block;
+}
+
+.input-icon{
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+    margin-bottom: -8px;
+}
+
+.plate-icon{
+    background: url('../img/plate.svg');
+    background-size: cover;
+}
+
+
+.pwd{
+    background: url('../img/pwd.svg');
+    background-size: cover;
+}
+
+
+.btn{
+    /* Color fallback */
+    background-color: darkslategrey;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 0;
+    margin-top: 26px;
+    color: white;
+    font-weight: 500;
+     
+}
+
+#delete-car{
+    background-color: #c32d2d;
+}
+
+.container1{
+    padding: 16px;
+    background-color: white;
+    height: 40px;
+    bottom: 0;
+    position: fixed;
+    width: 100vw;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.register-error{
+    color: #07FFFF;
+    font-size: 13px;
+    font-weight: 200;
+}
+
+.cancel{
+    color: white;
+    font-size: 13px;
+}
+
+::placeholder{
+    color: white;
+}
+
+
+.change-section{
+    cursor: pointer;
+}
+
+section{
+    display: none;
+    margin-top: 140px;
+}
+
+#main{
+    display: block;
+}
+
+#menu{
+    position: fixed;
+    width: 36px;
+    top: 16px;
+    right: 16px;
+    z-index: 22;
+}
+
+
+.wrapper{
+    width: 86vw;
+    margin-left: 7vw;
+    margin-top: 15vw;
+    text-align: center;
+}
+
+
+.car{
+    width: 140px;
+    height: 140px;
+    border: 1px solid #6ed0f8;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 2vw;
+}
+
+.type{
+    width: 100px;
+    height: 100px;
+    margin: 0px auto 0 auto;
+    background: url('../IMG/carrazos.png');
+}
+
+.type-A{
+    background-position: 100px 100px;
+}
+
+.type-B{
+    background-position: 100px 100px;
+}
+
+.type-C{
+    background-position: 200px 100px;
+}
+
+.plate{
+    font-family: 'Montserrat', sans-serif;
+    color: #6ed0f8;
+    font-weight: 200;
+    font-size: 13px;
+    text-align: center;
+    width: 90px;
+    margin: -6px auto 0 auto;
+    line-height: 1.3;
+}
+
+#add-car-btn{
+    margin-bottom: 140px;
+}
+
+
+ul.mainmenu{
+    position: fixed;
+    padding-top: 110px;
+    top: 0;
+    width: 100%;
+    background-color: black;
+    padding-bottom: 40px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    z-index: 10;
+    display: none;
+}
+
+
+ul.mainmenu a li,
+ul.mainmenu li{
+    color: #6ed0f8;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #0de6e6;
+}
+
+
+.car-type div{
+    display: inline-block;
+    width: 24vw;
+    height: 24vw;
+    margin: 0 1vw;
+    border: 1px solid rgba(45,195,195,0.5);
+    transition: box-shadow 0.3s ease-in;
+    cursor: pointer;
+}
+
+.type-a,
+.type-b,
+.type-c{
+    background: url('../IMG/carrazos.png');
+    background-size: 300% 200%;
+}
+
+.type-a{
+    background-position: 0% 0%;
+}
+.type-b{
+    background-position: 100% 0%;
+}
+.type-c{
+    background-position: 200% 0%;
+}
+
+/* cars ON */
+.type-a.on{
+    background-position: 0% 0%;
+}
+.type-b.on{
+    background-position: 100% 0%;
+}
+.type-c.on{
+    background-position: 200% 0%;
+}
+
+/* cars OFF */
+.type-a.off{
+    background-position: 0% 100%;
+}
+.type-b.off{
+    background-position: 100% 100%;
+}
+.type-c.off{
+    background-position: 200% 100%;
+}
+
+.car-type div.selected{
+    border: 1px solid rgba(45,195,195,1);
+    box-shadow: 0 0 20px rgba(45,195,195,1); 
+}
+
+.car-detils-plate{
+    font-size: 28px;
+    font-weight: 200;
+}
+
+
+/* SWITCH */
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #89c830;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

@@ -1,0 +1,581 @@
+    <script>
+        
+                   if(!store.get('logged-in-user')){
+               window.location.href = 'index.html';
+           }
+            
+            if(store.get('tot-lights') == null){
+                store.get('tot-lights',0);
+            }
+
+            $('.change-section').on('click',function(){
+                $('section').fadeOut().delay(600);
+                $($(this).data('goto')).fadeIn();
+            });
+            
+            $('#menu').on('click',function(){
+                $('ul').slideToggle();
+            });
+            
+            $('li span').text(store.get('logged-in-user'));
+            
+            var s_type = 'a';
+            
+            
+            if(store.get('tot-lights')==null){
+                store.set('tot-lights',0);
+            }
+            
+            $('#add-new-light').on('click',function(){
+                
+                store.set('tot-lights',store.get('tot-lights')+1);
+                
+                store.set('light-'+store.get('tot-lights'),{
+                    owner: store.get('logged-in-user'),
+                    type: s_type,
+                    plate: $('#plate').val(),
+                    status: 'off',
+                    enabled: true
+                });
+                
+                displaylight();
+                
+                $('section').fadeOut().delay(600);
+                $("#main").fadeIn();
+                
+            });
+            
+            function displaylight(){
+                
+                $('#lights-container').empty();
+                
+                for(var i=1; i<=store.get('tot-lights'); i++){
+                    var s = store.get('light-'+i);
+                    if(s.owner == store.get('logged-in-user')){
+                     
+                        $('#lights-container').append(`
+                   <div class="light" data-id='light-${i}'>
+                    <div class="type type-${s.type} ${s.status}"></div>
+                    <div class="plate">${s.plate}</div>
+                   </div>
+                  `);
+                        
+                    }
+                    
+                }
+                
+            }
+        
+            
+            var current_light = "";
+            
+            $('body').on('click','.light',function(){
+                current_light = $(this).data('id');
+                
+                var s = store.get($(this).data('id'));
+                $('.light-details-plate').html(s.plate);
+                $('.light-type div').removeClass();
+                $('.light-type div').addClass('type-'+s.type);
+                $('.light-type div').addClass(s.status);
+                
+               
+                $('section').fadeOut().delay(600);
+                $("#light-details").fadeIn();   
+                
+            });
+            
+            $('body').on('click','#light-status',function(){
+                
+                var s = store.get(current_light);
+                if(s.status == 'off'){
+                    
+                    $('#light-status')[0].checked = true;
+                    $('#light-details .light-type div').removeClass();
+                    $('#light-details .light-type div').addClass('type-'+s.type);
+                    $('#light-details .light-type div').addClass('on');
+                    
+                    store.update(current_light,function(current_light){
+                        current_light.status = 'on';
+                    });
+                }
+                   
+                else{
+                    $('#light-status')[0].checked = false;
+                    $('#light-details .light-type div').removeClass();
+                    $('#light-details .light-type div').addClass('type-'+s.type);
+                    $('#light-details .light-type div').addClass('off');
+                    
+                    store.update(current_light,function(current_light){
+                        current_light.status = 'off';
+                    });
+                }
+                
+            });
+        
+        displaylight();
+        
+        
+        var current_enabled = "";
+        
+        $('#goback-light').on('click',function(){
+           
+        
+            $('#light-details').fadeOut().delay(600);
+                $("#main").fadeIn();   
+            
+        });
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         if(store.get('tot-acs')==null){
+                store.set('tot-acs',0);
+            }
+            
+            $('#add-new-ac').on('click',function(){
+                
+                store.set('tot-acs',store.get('tot-acs')+1);
+                
+                store.set('acs-'+store.get('tot-acs'),{
+                    owner: store.get('logged-in-user'),
+                    type: s_type,
+                    plate: $('#plate').val(),
+                    status: 'off',
+                    enabled: true
+                });
+                
+                displayac();
+                
+                $('section').fadeOut().delay(600);
+                $("#main").fadeIn();
+                
+            });
+            
+            function displayac(){
+                
+                $('#ac-container').empty();
+                
+                for(var i=1; i<=store.get('tot-acs'); i++){
+                    var s = store.get('ac-'+i);
+                    if(s.owner == store.get('logged-in-user')){
+                     
+                        $('#ac-container').append(`
+                   <div class="light" data-id='light-${i}'>
+                    <div class="type type-${s.type} ${s.status}"></div>
+                    <div class="plate">${s.plate}</div>
+                   </div>
+                  `);
+                        
+                    }
+                    
+                }
+                
+            }
+        
+        
+                    var current_ac = "";
+            
+            $('body').on('click','.ac',function(){
+                current_ac = $(this).data('id');
+                
+                var s = store.get($(this).data('id'));
+                $('.ac-details-plate').html(s.plate);
+                $('.ac-type div').removeClass();
+                $('.ac-type div').addClass('type-'+s.type);
+                $('.ac-type div').addClass(s.status);
+                
+                if(s.status == 'off'){
+                    $('#ac-status')[0].checked = false;
+                }
+                else{
+                     $('#ac-status')[0].checked = true;
+                }
+                
+                $('section').fadeOut().delay(600);
+                $("#ac-details").fadeIn();   
+                
+            });
+            
+            $('body').on('click','#ac-status',function(){
+                
+                var s = store.get(current_light);
+                if(s.status == 'off'){
+                    
+                    $('#ac-status')[0].checked = true;
+                    $('#ac-details .ac-type div').removeClass();
+                    $('#ac-details .ac-type div').addClass('type-'+s.type);
+                    $('#ac-details .ac-type div').addClass('on');
+                    
+                    store.update(current_ac,function(current_ac){
+                        current_ac.status = 'on';
+                    });
+                }
+                   
+                else{
+                    $('#ac-status')[0].checked = false;
+                    $('#ac-details .ac-type div').removeClass();
+                    $('#ac-details .ac-type div').addClass('type-'+s.type);
+                    $('#ac-details .ac-type div').addClass('off');
+                    
+                    store.update(current_ac,function(current_ac){
+                        current_ac.status = 'off';
+                    });
+                }
+                
+            });
+        
+        displayac();
+        
+        
+        var current_enabled = "";
+        
+        $('#goback-ac').on('click',function(){
+           
+        
+            $('#ac-details').fadeOut().delay(600);
+                $("#main").fadeIn();   
+            
+        });
+        
+        
+        
+        </script>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         if(store.get('tot-lights')==null){
+                store.set('tot-lights',0);
+            }
+            
+            $('#add-new-light').on('click',function(){
+                
+                store.set('tot-lights',store.get('tot-lights')+1);
+                
+                store.set('light-'+store.get('tot-lights'),{
+                    owner: store.get('logged-in-user'),
+                    type: s_type,
+                    plate: $('#plate').val(),
+                    status: 'off',
+                    enabled: true
+                });
+                
+                displaylight();
+                
+                $('section').fadeOut().delay(600);
+                $("#main").fadeIn();
+                
+            });
+            
+            function displaylight(){
+                
+                $('#lights-container').empty();
+                
+                for(var i=1; i<=store.get('tot-lights'); i++){
+                    var s = store.get('light-'+i);
+                    if(s.owner == store.get('logged-in-user')){
+                     
+                        $('#lights-container').append(`
+                   <div class="light" data-id='light-${i}'>
+                    <div class="type type-${s.type} ${s.status}"></div>
+                    <div class="plate">${s.plate}</div>
+                   </div>
+                  `);
+                        
+                    }
+                    
+                }
+                
+            }
+        
+            
+        
+        
+         $('body').on('click','.switch',function(){
+               
+                //Read the state of the bulb
+                var b = store.get("bulb");
+                
+                //Change everything to 'on' or 'off':
+                if(b.state == "off"){
+                    //turn everything on:
+                    $('.light-type').removeClass('type-b');
+                    $('.light-type').addClass('type-a');
+                    $('.switch').removeClass('switch-b');
+                    $('.switch').addClass('switch-a');
+                    
+                    //update the state:
+                    store.update('bulb',function(bulb){
+                       bulb.state = 'on';
+                    });
+                }
+                else{
+                    //turn everything off:
+                    $('.light-type').removeClass('type-a');
+                    $('.light-type').addClass('type-b');
+                    $('.switch').removeClass('switch-a');
+                    $('.switch').addClass('switch-b');
+                    
+                    //update the state:
+                    store.update('bulb',function(bulb){
+                       bulb.state = 'off';
+                    });
+                }
+                
+            });
+        
+        
+            var current_light = "";
+            
+            $('body').on('click','.light',function(){
+                current_light = $(this).data('id');
+                
+                var s = store.get($(this).data('id'));
+                $('.light-details-plate').html(s.plate);
+                $('.light-type div').removeClass();
+                $('.light-type div').addClass('type-'+s.type);
+                $('.light-type div').addClass(s.status);
+                
+               
+                $('section').fadeOut().delay(600);
+                $("#light-details").fadeIn();   
+                
+            });
+            
+            $('body').on('click','#light-status',function(){
+                
+                var s = store.get(current_light);
+                if(s.status == 'off'){
+                    
+                    $('#light-status')[0].checked = true;
+                    $('#light-details .light-type div').removeClass();
+                    $('#light-details .light-type div').addClass('type-'+s.type);
+                    $('#light-details .light-type div').addClass('on');
+                    
+                    store.update(current_light,function(current_light){
+                        current_light.status = 'on';
+                    });
+                }
+                   
+                else{
+                    $('#light-status')[0].checked = false;
+                    $('#light-details .light-type div').removeClass();
+                    $('#light-details .light-type div').addClass('type-'+s.type);
+                    $('#light-details .light-type div').addClass('off');
+                    
+                    store.update(current_light,function(current_light){
+                        current_light.status = 'off';
+                    });
+                }
+                
+            });
+        
+        displaylight();
+        
+        
+        var current_enabled = "";
+        
+        $('#goback-light').on('click',function(){
+           
+        
+            $('#light-details').fadeOut().delay(600);
+                $("#main").fadeIn();   
+            
+        });
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         if(store.get('tot-acs')==null){
+                store.set('tot-acs',0);
+            }
+            
+            $('#add-new-ac').on('click',function(){
+                
+                store.set('tot-acs',store.get('tot-acs')+1);
+                
+                store.set('acs-'+store.get('tot-acs'),{
+                    owner: store.get('logged-in-user'),
+                    type: s_type,
+                    plate: $('#plate').val(),
+                    status: 'off',
+                    enabled: true
+                });
+                
+                displayac();
+                
+                $('section').fadeOut().delay(600);
+                $("#main").fadeIn();
+                
+            });
+            
+            function displayac(){
+                
+                $('#ac-container').empty();
+                
+                for(var i=1; i<=store.get('tot-acs'); i++){
+                    var s = store.get('ac-'+i);
+                    if(s.owner == store.get('logged-in-user')){
+                     
+                        $('#ac-container').append(`
+                   <div class="light" data-id='light-${i}'>
+                    <div class="type type-${s.type} ${s.status}"></div>
+                    <div class="plate">${s.plate}</div>
+                   </div>
+                  `);
+                        
+                    }
+                    
+                }
+                
+            }
+        
+        
+                    var current_ac = "";
+            
+            $('body').on('click','.ac',function(){
+                current_ac = $(this).data('id');
+                
+                var s = store.get($(this).data('id'));
+                $('.ac-details-plate').html(s.plate);
+                $('.ac-type div').removeClass();
+                $('.ac-type div').addClass('type-'+s.type);
+                $('.ac-type div').addClass(s.status);
+                
+                if(s.status == 'off'){
+                    $('#ac-status')[0].checked = false;
+                }
+                else{
+                     $('#ac-status')[0].checked = true;
+                }
+                
+                $('section').fadeOut().delay(600);
+                $("#ac-details").fadeIn();   
+                
+            });
+            
+            $('body').on('click','#ac-status',function(){
+                
+                var s = store.get(current_light);
+                if(s.status == 'off'){
+                    
+                    $('#ac-status')[0].checked = true;
+                    $('#ac-details .ac-type div').removeClass();
+                    $('#ac-details .ac-type div').addClass('type-'+s.type);
+                    $('#ac-details .ac-type div').addClass('on');
+                    
+                    store.update(current_ac,function(current_ac){
+                        current_ac.status = 'on';
+                    });
+                }
+                   
+                else{
+                    $('#ac-status')[0].checked = false;
+                    $('#ac-details .ac-type div').removeClass();
+                    $('#ac-details .ac-type div').addClass('type-'+s.type);
+                    $('#ac-details .ac-type div').addClass('off');
+                    
+                    store.update(current_ac,function(current_ac){
+                        current_ac.status = 'off';
+                    });
+                }
+                
+            });
+        
+        displayac();
+        
+        
+        var current_enabled = "";
+        
+        $('#goback-ac').on('click',function(){
+           
+        
+            $('#ac-details').fadeOut().delay(600);
+                $("#main").fadeIn();   
+            
+        });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*
+         $('body').on('click','.switch',function(){
+               
+                //Read the state of the light
+                var b = store.get("light");
+                
+                //Change everything to 'on' or 'off':
+                if(b == "off"){
+                    //turn everything on:
+                    $('.light-type').removeClass('type-b');
+                    $('.light-type').addClass('type-a');
+                    $('.switch').removeClass('switch-b');
+                    $('.switch').addClass('switch-a');
+                    
+                    //update the state:
+                    store.update('light',function(light){
+                       light.state = 'on';
+                    });
+                }
+                else{
+                    //turn everything off:
+                    $('.light-type').removeClass('type-a');
+                    $('.light-type').addClass('type-b');
+                    $('.switch').removeClass('switch-a');
+                    $('.switch').addClass('switch-b');
+                    
+                    //update the state:
+                    store.update('light',function(light){
+                       light.state = 'off';
+                    });
+                }
+                
+            });
+        
+        */
+        
+        
+        
+        

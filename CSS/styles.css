@@ -1,0 +1,215 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+h1{
+    font-family: 'Pacifico', sans-serif;
+    color: #0de6e6;
+    padding-top: 20vw;
+    text-align: center;
+    font-size: 18vw;
+    text-shadow: 2px 2px 0px #0d7c7c;
+}
+
+h3{
+    color: rgb(92, 140, 36);
+    margin-bottom: 6vw;
+    font-size: 6vw;
+}
+
+/* FORM ELEMENTS */
+
+input{
+    box-sizing: border-box;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 200;
+    padding: 6px 4px 4px 4px;
+    margin-bottom: 14px;
+    width: 100%;
+    transition: all 0.3s ease-in;
+}
+
+input[type=text],
+input[type=password]{
+    width: calc(100% - 36px);
+    display: inline-block;
+}
+
+.input-icon{
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+    margin-bottom: -8px;
+}
+
+.user{
+    background: url('../img/user.svg');
+    background-size: cover;
+}
+
+
+.pwd{
+    background: url('../img/pwd.svg');
+    background-size: cover;
+}
+
+
+.btn{
+    /* Color fallback */
+    background-color: rgba(45,195,195,1);
+    border: none;
+    border-radius: 20px;
+    padding: 10px 0;
+    margin-top: 26px;
+    color: white;
+    font-weight: 500;
+     
+}
+
+.register,
+.already-member{
+    color: white;
+    font-size: 12px;
+    font-weight: 200;
+}
+
+::placeholder{
+    color: white;
+}
+
+section#login form,
+section#create-account form{
+    width: 80vw;
+    margin: 30px auto;
+    position: absolute;
+    bottom: 0;
+    left: 10vw;
+}
+
+.login-error,
+.register-error{
+    color: #00fffd;
+    font-weight: 200;
+    width: 100%;
+    text-align: center;
+    display: none;
+    font-size: 3.5vw;
+}
+
+/* SECTIONS */
+
+section{
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    background: url('../img/bg.jpg');
+    background-size: cover;
+    position: relative;
+}
+
+section#login{
+    display: block;
+}
+
+.change-section{
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
